@@ -1,0 +1,1 @@
+c:\users\warren\documents\visual studio 2015\Projects\ShoppingDeals\ShoppingDeals\bin\Debug\ShoppingDeals.exe.config
