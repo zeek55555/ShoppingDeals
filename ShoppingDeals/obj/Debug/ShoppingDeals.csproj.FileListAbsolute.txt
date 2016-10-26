@@ -1,1 +1,9 @@
 c:\users\warren\documents\visual studio 2015\Projects\ShoppingDeals\ShoppingDeals\bin\Debug\ShoppingDeals.exe.config
+C:\Users\Warren\Documents\Visual Studio 2015\Projects\ShoppingDeals\ShoppingDeals\bin\Debug\ShoppingDeals.exe
+C:\Users\Warren\Documents\Visual Studio 2015\Projects\ShoppingDeals\ShoppingDeals\bin\Debug\ShoppingDeals.pdb
+C:\Users\Warren\Documents\Visual Studio 2015\Projects\ShoppingDeals\ShoppingDeals\obj\Debug\ShoppingDeals.csprojResolveAssemblyReference.cache
+C:\Users\Warren\Documents\Visual Studio 2015\Projects\ShoppingDeals\ShoppingDeals\obj\Debug\ShoppingDeals.Form1.resources
+C:\Users\Warren\Documents\Visual Studio 2015\Projects\ShoppingDeals\ShoppingDeals\obj\Debug\ShoppingDeals.Properties.Resources.resources
+C:\Users\Warren\Documents\Visual Studio 2015\Projects\ShoppingDeals\ShoppingDeals\obj\Debug\ShoppingDeals.csproj.GenerateResource.Cache
+C:\Users\Warren\Documents\Visual Studio 2015\Projects\ShoppingDeals\ShoppingDeals\obj\Debug\ShoppingDeals.exe
+C:\Users\Warren\Documents\Visual Studio 2015\Projects\ShoppingDeals\ShoppingDeals\obj\Debug\ShoppingDeals.pdb

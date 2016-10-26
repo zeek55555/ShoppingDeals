@@ -15,6 +15,9 @@ namespace ShoppingDeals
         public Form1()
         {
             InitializeComponent();
+
+            //dateTimePicker.Format = DateTimePickerFormat.Custom;
+            //dateTimePicker.CustomFormat = "MM/dd/yyyy";
         }
     }
 }
