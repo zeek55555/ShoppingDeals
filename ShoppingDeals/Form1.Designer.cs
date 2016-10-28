@@ -43,7 +43,7 @@
             this.btnAddDeal = new System.Windows.Forms.Button();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.lblPrice = new System.Windows.Forms.Label();
-            this.txtButtonToAdd = new System.Windows.Forms.TextBox();
+            this.txtProductToAdd = new System.Windows.Forms.TextBox();
             this.lblProductToAdd = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
             this.txtDeals = new System.Windows.Forms.TextBox();
@@ -84,6 +84,7 @@
             this.btnAddUser.TabIndex = 2;
             this.btnAddUser.Text = "Add User";
             this.btnAddUser.UseVisualStyleBackColor = true;
+            this.btnAddUser.Click += new System.EventHandler(this.btnAddUser_Click);
             // 
             // txtUsernameToAdd
             // 
@@ -156,7 +157,7 @@
             this.grpDeals.Controls.Add(this.btnAddDeal);
             this.grpDeals.Controls.Add(this.txtPrice);
             this.grpDeals.Controls.Add(this.lblPrice);
-            this.grpDeals.Controls.Add(this.txtButtonToAdd);
+            this.grpDeals.Controls.Add(this.txtProductToAdd);
             this.grpDeals.Controls.Add(this.lblProductToAdd);
             this.grpDeals.Location = new System.Drawing.Point(308, 15);
             this.grpDeals.Name = "grpDeals";
@@ -190,6 +191,7 @@
             this.btnAddDeal.TabIndex = 4;
             this.btnAddDeal.Text = "Add Deal";
             this.btnAddDeal.UseVisualStyleBackColor = true;
+            this.btnAddDeal.Click += new System.EventHandler(this.btnAddDeal_Click);
             // 
             // txtPrice
             // 
@@ -207,12 +209,12 @@
             this.lblPrice.TabIndex = 2;
             this.lblPrice.Text = "Price:";
             // 
-            // txtButtonToAdd
+            // txtProductToAdd
             // 
-            this.txtButtonToAdd.Location = new System.Drawing.Point(16, 43);
-            this.txtButtonToAdd.Name = "txtButtonToAdd";
-            this.txtButtonToAdd.Size = new System.Drawing.Size(135, 22);
-            this.txtButtonToAdd.TabIndex = 1;
+            this.txtProductToAdd.Location = new System.Drawing.Point(16, 43);
+            this.txtProductToAdd.Name = "txtProductToAdd";
+            this.txtProductToAdd.Size = new System.Drawing.Size(135, 22);
+            this.txtProductToAdd.TabIndex = 1;
             // 
             // lblProductToAdd
             // 
@@ -340,6 +342,7 @@
             this.Controls.Add(this.Login);
             this.Name = "Form1";
             this.Text = "Shopping Deals";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Login.ResumeLayout(false);
             this.Login.PerformLayout();
             this.grpLogin.ResumeLayout(false);
@@ -374,7 +377,7 @@
         private System.Windows.Forms.Button btnAddDeal;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Label lblPrice;
-        private System.Windows.Forms.TextBox txtButtonToAdd;
+        private System.Windows.Forms.TextBox txtProductToAdd;
         private System.Windows.Forms.Label lblProductToAdd;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.TextBox txtDeals;
