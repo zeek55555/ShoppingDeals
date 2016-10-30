@@ -108,17 +108,40 @@ namespace ShoppingDeals
                 lblStatusStrip.Text = "Error reading the file";
                 Console.WriteLine(ex.Message);
             }
-            
+
             for(int i = 0; i < deals.Count; i++)
             {
-                txtDeals.Text += deals[i].product + ", " + deals[i].price + ", " + deals[i].expirationDate + "\n";
+                if (deals[i].expirationDate < DateTime.Now)
+                {
+                    deals.RemoveAt(i);
+                    i--;
+                }
             }
+
+            writeDealsToFile();
+            
+            for(int i = 0; i < deals.Count - 1; i++)
+            {
+                txtDeals.Text += deals[i].product + ", " + deals[i].price + ", " + deals[i].expirationDate + "\r\n";
+            }
+            txtDeals.Text += deals[deals.Count - 1].product + ", " + deals[deals.Count - 1].price + ", " + deals[deals.Count - 1].expirationDate;
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
             User user;
             user.name = txtUsernameToAdd.Text;
+
+            for(int i = 0; i < users.Count; i++)
+            {
+                if(users[i].name == user.name)
+                {
+                    lblStatusStrip.Text = "Username \"" + user.name + "\" already taken";
+                    txtUsernameToAdd.Text = "";
+                    return;
+                }
+            }
+
             users.Add(user);
 
             try
@@ -147,13 +170,35 @@ namespace ShoppingDeals
         {
             Deal deal;
             deal.product = txtProductToAdd.Text;
+
+            for(int i = 0; i < deals.Count; i++)
+            {
+                if(deals[i].product == deal.product)
+                {
+                    lblStatusStrip.Text = "A deal for " + deal.product + " already exists";
+                    return;
+                }
+            }
+
             deal.price = double.Parse(txtPrice.Text);
             deal.expirationDate = dateTimePicker.Value.Date;
+
+            if (deal.expirationDate < DateTime.Now)
+            {
+                lblStatusStrip.Text = "Expiration date is invalid";
+                return;
+            }
+
             deal.likes = new List<String>();
             deal.dislikes = new List<String>();
-            txtDeals.Text += "\n" + deal.product + ", " + deal.price + ", " + deal.expirationDate;
+            txtDeals.Text += "\r\n" + deal.product + ", " + deal.price + ", " + deal.expirationDate;
             deals.Add(deal);
 
+            writeDealsToFile();
+        }
+
+        private void writeDealsToFile()
+        {
             try
             {
                 String output = "";
