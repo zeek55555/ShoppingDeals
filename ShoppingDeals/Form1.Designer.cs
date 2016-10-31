@@ -264,6 +264,7 @@
             this.btnChoose.TabIndex = 2;
             this.btnChoose.Text = "Choose";
             this.btnChoose.UseVisualStyleBackColor = true;
+            this.btnChoose.Click += new System.EventHandler(this.btnChoose_Click);
             // 
             // radDislikeDeal
             // 
@@ -305,6 +306,7 @@
             this.btnSearchDeal.TabIndex = 1;
             this.btnSearchDeal.Text = "Search Deal";
             this.btnSearchDeal.UseVisualStyleBackColor = true;
+            this.btnSearchDeal.Click += new System.EventHandler(this.btnSearchDeal_Click);
             // 
             // txtSearchDeal
             // 

@@ -207,7 +207,7 @@ namespace ShoppingDeals
                 for (int i = 0; i < deals.Count; i++)
                 {
                     tempDeal = deals[i];
-                    output += deals[i].product + "," + tempDeal.price + "," + tempDeal.expirationDate + ",";
+                    output += tempDeal.product + "," + tempDeal.price + "," + tempDeal.expirationDate + ",";
                     for (int j = 0; j < tempDeal.likes.Count; j++)
                     {
                         output += tempDeal.likes[j] + " ";
@@ -273,6 +273,43 @@ namespace ShoppingDeals
             btnLogin.Enabled = true;
             btnLogout.Enabled = false;
             lblStatusStrip.Text = "Logged out";
+        }
+
+        private void btnChoose_Click(object sender, EventArgs e)
+        {
+            if(btnLogin.Enabled == true)
+            {
+                lblStatusStrip.Text = "Please login to like/dislike a deal";
+                return;
+            }
+        }
+
+        private void btnSearchDeal_Click(object sender, EventArgs e)
+        {
+            String search = txtSearchDeal.Text;
+            String output = "";
+            Deal tempDeal;
+
+            for (int i = 0; i < deals.Count; i++)
+            {
+                tempDeal = deals[i];
+                if (tempDeal.product.Contains(search))
+                {
+                    output += tempDeal.product + "," + tempDeal.price + "," + tempDeal.expirationDate + ",";
+                    for (int j = 0; j < tempDeal.likes.Count; j++)
+                    {
+                        output += tempDeal.likes[j] + " ";
+                    }
+                    output += ",";
+                    for (int j = 0; j < tempDeal.dislikes.Count; j++)
+                    {
+                        output += tempDeal.dislikes[j] + " ";
+                    }
+                    output += "\r\n";
+                }
+            }
+
+            txtDeals.Text = output;
         }
     }
 }
