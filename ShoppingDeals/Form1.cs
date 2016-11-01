@@ -293,7 +293,7 @@ namespace ShoppingDeals
             for (int i = 0; i < deals.Count; i++)
             {
                 tempDeal = deals[i];
-                if (tempDeal.product.Contains(search))
+                if (tempDeal.product == search)
                 {
                     output += tempDeal.product + "," + tempDeal.price + "," + tempDeal.expirationDate + ",";
                     for (int j = 0; j < tempDeal.likes.Count; j++)
