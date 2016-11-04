@@ -120,11 +120,10 @@ namespace ShoppingDeals
 
             writeDealsToFile();
             
-            for(int i = 0; i < deals.Count - 1; i++)
+            for(int i = 0; i < deals.Count; i++)
             {
                 txtDeals.Text += deals[i].product + ", " + deals[i].price + ", " + deals[i].expirationDate + "\r\n";
             }
-            txtDeals.Text += deals[deals.Count - 1].product + ", " + deals[deals.Count - 1].price + ", " + deals[deals.Count - 1].expirationDate;
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)
@@ -261,6 +260,7 @@ namespace ShoppingDeals
                 {
                     btnLogin.Enabled = false;
                     btnLogout.Enabled = true;
+                    grpLikeDislike.Enabled = true;
                     lblStatusStrip.Text = "Logged in as: " + attemptedUsername;
                     return;
                 }
@@ -272,15 +272,23 @@ namespace ShoppingDeals
         {
             btnLogin.Enabled = true;
             btnLogout.Enabled = false;
+            grpLikeDislike.Enabled = false;
             lblStatusStrip.Text = "Logged out";
         }
 
         private void btnChoose_Click(object sender, EventArgs e)
         {
-            if(btnLogin.Enabled == true)
+            if (radLikeDeal.Checked)
             {
-                lblStatusStrip.Text = "Please login to like/dislike a deal";
-                return;
+
+            }
+            else if (radDislikeDeal.Checked)
+            {
+
+            }
+            else
+            {
+                lblStatusStrip.Text = "No option selected";
             }
         }
 
