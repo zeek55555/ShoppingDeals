@@ -360,29 +360,17 @@ namespace ShoppingDeals
         private void btnSearchDeal_Click(object sender, EventArgs e)
         {
             String search = txtSearchDeal.Text;
-            String output = "";
-            Deal tempDeal;
-
+            
             for (int i = 0; i < deals.Count; i++)
             {
-                tempDeal = deals[i];
-                if (tempDeal.product == search)
+                if(deals[i].product == search)
                 {
-                    output += tempDeal.product + "," + tempDeal.price + "," + tempDeal.expirationDate + ",";
-                    for (int j = 0; j < tempDeal.likes.Count; j++)
-                    {
-                        output += tempDeal.likes[j] + " ";
-                    }
-                    output += ",";
-                    for (int j = 0; j < tempDeal.dislikes.Count; j++)
-                    {
-                        output += tempDeal.dislikes[j] + " ";
-                    }
-                    output += "\r\n";
+                    lstDeals.SelectedIndex = i;
+                    return;
                 }
             }
 
-            lstDeals.Text = output;
+            lblStatusStrip.Text = "No product with that name";
         }
 
         private void btnExit_Click(object sender, EventArgs e)
