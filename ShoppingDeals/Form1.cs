@@ -116,7 +116,7 @@ namespace ShoppingDeals
 
             for(int i = 0; i < deals.Count; i++)
             {
-                if (deals[i].expirationDate < DateTime.Now)
+                if (deals[i].expirationDate < DateTime.Today)
                 {
                     deals.RemoveAt(i);
                     i--;
@@ -150,6 +150,11 @@ namespace ShoppingDeals
             User user;
             user.name = txtUsernameToAdd.Text;
 
+            if(user.name == "")
+            {
+                lblStatusStrip.Text = "Username cannot be blank";
+                return;
+            }
             if (usernameTaken(user.name))
             {
                 return;
@@ -197,7 +202,7 @@ namespace ShoppingDeals
             deal.price = double.Parse(txtPrice.Text);
             deal.expirationDate = dateTimePicker.Value.Date;
 
-            if (deal.expirationDate < DateTime.Now)
+            if (deal.expirationDate < DateTime.Today)
             {
                 lblStatusStrip.Text = "Expiration date is invalid";
                 return;
@@ -205,7 +210,7 @@ namespace ShoppingDeals
 
             deal.likes = new List<String>();
             deal.dislikes = new List<String>();
-            lstDeals.Items.Add("\r\n" + deal.product + "," + deal.price + "," + deal.expirationDate + " Likes: 0 Dislikes: 0");
+            lstDeals.Items.Add("\r\n" + deal.product + ", " + deal.price.ToString("C") + "," + deal.expirationDate.ToString("M'/'d'/'yyyy") + " Likes: 0 Dislikes: 0");
             deals.Add(deal);
 
             writeDealsToFile();
@@ -256,7 +261,7 @@ namespace ShoppingDeals
 
             for (int i = 0; i < deals.Count; i++)
             {
-                lstDeals.Items.Add(deals[i].product + ", " + deals[i].price + ", " + deals[i].expirationDate + " Likes: " + deals[i].likes.Count + " Dislikes: " + deals[i].dislikes.Count + "\r\n");
+                lstDeals.Items.Add(deals[i].product + ", " + deals[i].price.ToString("C") + ", " + deals[i].expirationDate.ToString("M'/'d'/'yyyy") + " Likes: " + deals[i].likes.Count + " Dislikes: " + deals[i].dislikes.Count + "\r\n");
             }
         }
 
