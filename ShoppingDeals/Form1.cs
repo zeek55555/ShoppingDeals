@@ -89,7 +89,7 @@ namespace ShoppingDeals
                         }
                         deal.likes = likeList;
 
-                        String[] dislikes = dealInfo[4].Split(' ');
+                        String[] dislikes = dealInfo[4].Split('+');
                         List<String> dislikeList = new List<String>();
                         for (int i = 0; i < dislikes.Length; i++)
                         {
@@ -122,8 +122,26 @@ namespace ShoppingDeals
             
             for(int i = 0; i < deals.Count; i++)
             {
-                txtDeals.Text += deals[i].product + ", " + deals[i].price + ", " + deals[i].expirationDate + "\r\n";
+                lstDeals.Items.Add(deals[i].product + ", " + deals[i].price + ", " + deals[i].expirationDate + " Likes: " + deals[i].likes.Count + " Dislikes: " + deals[i].dislikes.Count + "\r\n");
             }
+        }
+
+        private bool usernameTaken(String username)
+        {
+            bool result = false;
+
+            for (int i = 0; i < users.Count; i++)
+            {
+                if (username == users[i].name)
+                {
+                    lblStatusStrip.Text = "Username \"" + username + "\" already taken";
+                    txtUsernameToAdd.Text = "";
+                    result = true;
+                    break;
+                }
+            }
+
+            return result;
         }
 
         private void btnAddUser_Click(object sender, EventArgs e)
@@ -131,17 +149,13 @@ namespace ShoppingDeals
             User user;
             user.name = txtUsernameToAdd.Text;
 
-            for(int i = 0; i < users.Count; i++)
+            if (usernameTaken(user.name))
             {
-                if(users[i].name == user.name)
-                {
-                    lblStatusStrip.Text = "Username \"" + user.name + "\" already taken";
-                    txtUsernameToAdd.Text = "";
-                    return;
-                }
+                return;
             }
 
             users.Add(user);
+            lblStatusStrip.Text = "User \"" + user.name + "\" added";
 
             try
             {
@@ -190,7 +204,7 @@ namespace ShoppingDeals
 
             deal.likes = new List<String>();
             deal.dislikes = new List<String>();
-            txtDeals.Text += "\r\n" + deal.product + ", " + deal.price + ", " + deal.expirationDate;
+            lstDeals.Items.Add("\r\n" + deal.product + "," + deal.price + "," + deal.expirationDate + " Likes: 0 Dislikes: 0");
             deals.Add(deal);
 
             writeDealsToFile();
@@ -209,12 +223,12 @@ namespace ShoppingDeals
                     output += tempDeal.product + "," + tempDeal.price + "," + tempDeal.expirationDate + ",";
                     for (int j = 0; j < tempDeal.likes.Count; j++)
                     {
-                        output += tempDeal.likes[j] + " ";
+                        output += tempDeal.likes[j] + "+";
                     }
                     output += ",";
                     for (int j = 0; j < tempDeal.dislikes.Count; j++)
                     {
-                        output += tempDeal.dislikes[j] + " ";
+                        output += tempDeal.dislikes[j] + "+";
                     }
                     output += "\n";
                 }
@@ -231,22 +245,6 @@ namespace ShoppingDeals
                 lblStatusStrip.Text = "Error saving the file";
                 Console.WriteLine("ERROR MESSAGE: " + ex.Message);
             }
-        }
-
-        private bool usernameTaken(String username)
-        {
-            bool result = false;
-
-            for (int i = 0; i < users.Count; i++)
-            {
-                if(username == users[i].name)
-                {
-                    result = true;
-                    break;
-                }
-            }
-
-            return result;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -278,9 +276,10 @@ namespace ShoppingDeals
 
         private void btnChoose_Click(object sender, EventArgs e)
         {
+            //this.lstDeals.get
             if (radLikeDeal.Checked)
             {
-
+                //txtDeals.g
             }
             else if (radDislikeDeal.Checked)
             {
@@ -317,7 +316,12 @@ namespace ShoppingDeals
                 }
             }
 
-            txtDeals.Text = output;
+            lstDeals.Text = output;
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

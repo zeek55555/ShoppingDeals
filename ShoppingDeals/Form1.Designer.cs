@@ -46,7 +46,6 @@
             this.txtProductToAdd = new System.Windows.Forms.TextBox();
             this.lblProductToAdd = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
-            this.txtDeals = new System.Windows.Forms.TextBox();
             this.grpLikeDislike = new System.Windows.Forms.GroupBox();
             this.btnChoose = new System.Windows.Forms.Button();
             this.radDislikeDeal = new System.Windows.Forms.RadioButton();
@@ -56,6 +55,7 @@
             this.txtSearchDeal = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatusStrip = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lstDeals = new System.Windows.Forms.ListView();
             this.Login.SuspendLayout();
             this.grpLogin.SuspendLayout();
             this.grpDeals.SuspendLayout();
@@ -235,14 +235,7 @@
             this.btnExit.TabIndex = 3;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
-            // 
-            // txtDeals
-            // 
-            this.txtDeals.Location = new System.Drawing.Point(607, 15);
-            this.txtDeals.Multiline = true;
-            this.txtDeals.Name = "txtDeals";
-            this.txtDeals.Size = new System.Drawing.Size(516, 193);
-            this.txtDeals.TabIndex = 4;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // grpLikeDislike
             // 
@@ -331,15 +324,24 @@
             this.lblStatusStrip.Name = "lblStatusStrip";
             this.lblStatusStrip.Size = new System.Drawing.Size(0, 17);
             // 
+            // lstDeals
+            // 
+            this.lstDeals.Location = new System.Drawing.Point(607, 15);
+            this.lstDeals.Name = "lstDeals";
+            this.lstDeals.Size = new System.Drawing.Size(516, 193);
+            this.lstDeals.TabIndex = 8;
+            this.lstDeals.UseCompatibleStateImageBehavior = false;
+            this.lstDeals.View = System.Windows.Forms.View.List;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1135, 354);
+            this.Controls.Add(this.lstDeals);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.grpLikeDislike);
-            this.Controls.Add(this.txtDeals);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.grpDeals);
             this.Controls.Add(this.grpLogin);
@@ -384,7 +386,6 @@
         private System.Windows.Forms.TextBox txtProductToAdd;
         private System.Windows.Forms.Label lblProductToAdd;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.TextBox txtDeals;
         private System.Windows.Forms.GroupBox grpLikeDislike;
         private System.Windows.Forms.Button btnChoose;
         private System.Windows.Forms.RadioButton radDislikeDeal;
@@ -394,6 +395,7 @@
         private System.Windows.Forms.TextBox txtSearchDeal;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblStatusStrip;
+        private System.Windows.Forms.ListView lstDeals;
     }
 }
 
