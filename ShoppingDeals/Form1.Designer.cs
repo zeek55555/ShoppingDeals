@@ -55,7 +55,7 @@
             this.txtSearchDeal = new System.Windows.Forms.TextBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatusStrip = new System.Windows.Forms.ToolStripStatusLabel();
-            this.lstDeals = new System.Windows.Forms.ListView();
+            this.lstDeals = new System.Windows.Forms.ListBox();
             this.Login.SuspendLayout();
             this.grpLogin.SuspendLayout();
             this.grpDeals.SuspendLayout();
@@ -326,12 +326,12 @@
             // 
             // lstDeals
             // 
+            this.lstDeals.FormattingEnabled = true;
+            this.lstDeals.ItemHeight = 16;
             this.lstDeals.Location = new System.Drawing.Point(607, 15);
             this.lstDeals.Name = "lstDeals";
-            this.lstDeals.Size = new System.Drawing.Size(516, 193);
+            this.lstDeals.Size = new System.Drawing.Size(510, 180);
             this.lstDeals.TabIndex = 8;
-            this.lstDeals.UseCompatibleStateImageBehavior = false;
-            this.lstDeals.View = System.Windows.Forms.View.List;
             // 
             // Form1
             // 
@@ -395,7 +395,7 @@
         private System.Windows.Forms.TextBox txtSearchDeal;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblStatusStrip;
-        private System.Windows.Forms.ListView lstDeals;
+        private System.Windows.Forms.ListBox lstDeals;
     }
 }
 

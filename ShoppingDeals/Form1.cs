@@ -14,6 +14,9 @@ namespace ShoppingDeals
 {
     public partial class Form1 : Form
     {
+
+        String loggedInUser = "";
+
         struct User
         {
             public String name;
@@ -81,7 +84,9 @@ namespace ShoppingDeals
                         deal.price = Double.Parse(dealInfo[1]);
                         deal.expirationDate = Convert.ToDateTime(dealInfo[2]);
 
-                        String[] likes = dealInfo[3].Split(' ');
+                        String[] splitChars = new string[] {"+"};
+
+                        String[] likes = dealInfo[3].Split(splitChars, StringSplitOptions.RemoveEmptyEntries);
                         List<String> likeList = new List<String>();
                         for(int i = 0; i < likes.Length; i++)
                         {
@@ -89,7 +94,7 @@ namespace ShoppingDeals
                         }
                         deal.likes = likeList;
 
-                        String[] dislikes = dealInfo[4].Split('+');
+                        String[] dislikes = dealInfo[4].Split(splitChars, StringSplitOptions.RemoveEmptyEntries);
                         List<String> dislikeList = new List<String>();
                         for (int i = 0; i < dislikes.Length; i++)
                         {
@@ -119,11 +124,7 @@ namespace ShoppingDeals
             }
 
             writeDealsToFile();
-            
-            for(int i = 0; i < deals.Count; i++)
-            {
-                lstDeals.Items.Add(deals[i].product + ", " + deals[i].price + ", " + deals[i].expirationDate + " Likes: " + deals[i].likes.Count + " Dislikes: " + deals[i].dislikes.Count + "\r\n");
-            }
+            listDeals();
         }
 
         private bool usernameTaken(String username)
@@ -224,11 +225,13 @@ namespace ShoppingDeals
                     for (int j = 0; j < tempDeal.likes.Count; j++)
                     {
                         output += tempDeal.likes[j] + "+";
+                        Console.WriteLine("Like - " + tempDeal.likes[j]);
                     }
                     output += ",";
                     for (int j = 0; j < tempDeal.dislikes.Count; j++)
                     {
                         output += tempDeal.dislikes[j] + "+";
+                        Console.WriteLine("Dislike - " + tempDeal.dislikes[j]);
                     }
                     output += "\n";
                 }
@@ -247,6 +250,16 @@ namespace ShoppingDeals
             }
         }
 
+        public void listDeals()
+        {
+            lstDeals.Items.Clear();
+
+            for (int i = 0; i < deals.Count; i++)
+            {
+                lstDeals.Items.Add(deals[i].product + ", " + deals[i].price + ", " + deals[i].expirationDate + " Likes: " + deals[i].likes.Count + " Dislikes: " + deals[i].dislikes.Count + "\r\n");
+            }
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             String attemptedUsername = txtEnterUsername.Text;
@@ -260,6 +273,7 @@ namespace ShoppingDeals
                     btnLogout.Enabled = true;
                     grpLikeDislike.Enabled = true;
                     lblStatusStrip.Text = "Logged in as: " + attemptedUsername;
+                    loggedInUser = attemptedUsername;
                     return;
                 }
             }
@@ -271,24 +285,76 @@ namespace ShoppingDeals
             btnLogin.Enabled = true;
             btnLogout.Enabled = false;
             grpLikeDislike.Enabled = false;
+            loggedInUser = "";
             lblStatusStrip.Text = "Logged out";
         }
 
         private void btnChoose_Click(object sender, EventArgs e)
         {
-            //this.lstDeals.get
+            int selectedDeal = lstDeals.SelectedIndex;
+            if ((selectedDeal >= 0) == false)
+            {
+                lblStatusStrip.Text = "Please select a deal";
+                return;
+            }
+
+            Deal tempDeal = deals[selectedDeal];
+            int likeCount = tempDeal.likes.Count;
+            int dislikeCount = tempDeal.dislikes.Count;
+
             if (radLikeDeal.Checked)
             {
-                //txtDeals.g
+                for (int i = 0; i < likeCount; i++)
+                {
+                    if (loggedInUser == tempDeal.likes[i])
+                    {
+                        lblStatusStrip.Text = "You already like this deal";
+                        return;
+                    }
+                }
+                for(int i = 0; i < dislikeCount; i++)
+                {
+                    if(loggedInUser == tempDeal.dislikes[i])
+                    {
+                        tempDeal.dislikes.RemoveAt(i);
+                        break;
+                    }
+                }
+                Console.WriteLine("CHOSE: " + selectedDeal);
+                deals[lstDeals.SelectedIndex].likes.Add(loggedInUser);
+                lblStatusStrip.Text = "You now like this deal";
+                writeDealsToFile();
             }
             else if (radDislikeDeal.Checked)
             {
-
+                for (int i = 0; i < dislikeCount; i++)
+                {
+                    if (loggedInUser == tempDeal.dislikes[i])
+                    {
+                        lblStatusStrip.Text = "You already dislike this deal";
+                        return;
+                    }
+                }
+                for (int i = 0; i < likeCount; i++)
+                {
+                    if (loggedInUser == tempDeal.likes[i])
+                    {
+                        tempDeal.likes.RemoveAt(i);
+                        break;
+                    }
+                }
+                deals[lstDeals.SelectedIndex].dislikes.Add(loggedInUser);
+                lblStatusStrip.Text = "You now dislike this deal";
+                writeDealsToFile();
             }
             else
             {
-                lblStatusStrip.Text = "No option selected";
+                lblStatusStrip.Text = "Please select like or dislike";
             }
+
+            deals[selectedDeal] = tempDeal;
+
+            listDeals();
         }
 
         private void btnSearchDeal_Click(object sender, EventArgs e)
