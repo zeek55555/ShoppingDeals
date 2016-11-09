@@ -266,13 +266,13 @@
             this.radDislikeDeal.Name = "radDislikeDeal";
             this.radDislikeDeal.Size = new System.Drawing.Size(103, 21);
             this.radDislikeDeal.TabIndex = 1;
-            this.radDislikeDeal.TabStop = true;
             this.radDislikeDeal.Text = "Dislike Deal";
             this.radDislikeDeal.UseVisualStyleBackColor = true;
             // 
             // radLikeDeal
             // 
             this.radLikeDeal.AutoSize = true;
+            this.radLikeDeal.Checked = true;
             this.radLikeDeal.Location = new System.Drawing.Point(22, 31);
             this.radLikeDeal.Name = "radLikeDeal";
             this.radLikeDeal.Size = new System.Drawing.Size(88, 21);
